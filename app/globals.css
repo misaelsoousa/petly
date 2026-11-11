@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  /* --brand é sobrescrita no layout com a "Cor da marca" cadastrada no Nexus */
+  --brand: #e4572e;
+  --brand-ink: color-mix(in oklab, var(--brand) 70%, black);
+  --brand-soft: color-mix(in oklab, var(--brand) 12%, white);
+  --bg: #fffaf4;
+  --surface: #ffffff;
+  --ink: #2b2118;
+  --muted: #6f625a;
+  --line: #efe4d8;
+  --leaf: #2b9348;
+  --sun: #f6c445;
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-leaf: var(--leaf);
+  --color-sun: var(--sun);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--brand);
+  color: white;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-display text-base font-semibold transition hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply bg-brand text-white shadow-[0_6px_0_var(--brand-ink)] hover:shadow-[0_8px_0_var(--brand-ink)];
+  }
+
+  .btn-ghost {
+    @apply border-2 border-ink/10 bg-surface text-ink hover:border-brand hover:text-brand;
+  }
+
+  .card {
+    @apply rounded-3xl border border-line bg-surface shadow-[0_2px_0_var(--line)];
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-brand-soft px-3 py-1 text-xs font-bold text-brand-ink;
+  }
+
+  .eyebrow {
+    @apply font-display text-sm font-semibold tracking-wide text-brand uppercase;
+  }
+
+  .title {
+    @apply font-display text-3xl font-bold text-balance sm:text-4xl;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border-2 border-line bg-white px-4 py-2.5 text-base outline-none transition placeholder:text-muted/60 focus:border-brand;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn {
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}
